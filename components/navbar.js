@@ -4,7 +4,7 @@ const items = [
     titulo: "Products",
     href: `./product.html?prod=${Math.floor(Math.random() * 12) + 1}`,
   },
-  { titulo: "Sales", href: "./sales.html" },
+  { titulo: "Contact", href: "./sales.html" },
 ];
 
 const header = document.querySelector("header");
@@ -16,8 +16,7 @@ header.innerHTML = `
     <nav class="navbar navbar-expand-lg py-4 px-5 my-4 rounded-5 justify-content-between align-items-center" style="background-color: #032661;">
         <div class="container-fluid">
           <div class="d-flex flex-row align-items-center gap-3 justify-content-between">
-            <img height="36"src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="Javascript Logo" />
-            <a href="./index.html" class="link-offset-2 link-underline link-underline-opacity-0" style="color: #ffffff; font-size: 1.25rem;">Cine Store 🚬</a>
+            <a href="./index.html" class="link-offset-2 link-underline link-underline-opacity-0" style="color: #ffffff; font-size: 1.25rem;">Furniture Store </a>
           </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +28,7 @@ header.innerHTML = `
             ${
               email
                 ? `<div>
-                    <span class="text-white">Hola, ${email}</span>
+                    <span class="text-white">${email}</span>
                     <img height="50" style="cursor: pointer; padding-left: 20px" id="avatar" src="https://avatars.githubusercontent.com/u/96532888?v=4" alt="Francogalfre Github Avatar" />
                   </div>`
                 : `<button onclick='window.location.href = "./login.html"' class="btn btn-primary">Iniciar sesión</button>`

@@ -5,36 +5,37 @@ const input = document.querySelector(".form-control");
 const resetButton = document.querySelector(".delete-button");
 const container = document.querySelector(".products-container");
 const categoriesContainer = document.querySelector(".buttons-container");
+const spinner = document.getElementById("spinner");
 
-title.innerText = "Productos";
+// Set initial title
+title.innerText = "Products";
 
-const createCards = (movies) => {
-  if (movies.length === 0) {
-    container.innerHTML = `<p class="text-danger">No se encontró ninguna película.</p>`;
+// Create product cards
+const createCards = (products) => {
+  if (products.length === 0) {
+    container.innerHTML = `<p class="text-danger">No products found.</p>`;
     return;
   }
 
-  const cards = movies.map(
-    (movie) => `
+  const cards = products.map(
+    (product) => `
       <div class="col-md-3 mb-4">
         <div class="card" style="--bs-card-border-width: 0; position: relative;">
-          <img src=${movie.image} class="card-img-top" alt="${movie.title}">
-
+          <img src="${product.image}" class="card-img-top" alt="${product.title}">
           ${
-            movie.stock === 0
+            product.stock === 0
               ? `<div class="position-absolute top-0 end-0 m-2 p-2 bg-danger text-white fw-bold rounded">
-                  Sin stock
+                  Out of Stock
                 </div>`
               : ""
           }
-
           <div class="card-body">
-            <h5 class="card-title pb-2 text-light">${movie.title}</h5>
+            <h5 class="card-title pb-2 text-light">${product.title}</h5>
             <span class="card-genre badge bg-secondary text-light mb-2" style="font-size: 1rem; font-weight: normal; display: inline-block;">
-              ${movie.genre}
+              ${product.genre}
             </span>
-            <p class="card-text">${movie.description.slice(0, 50)}...</p>
-            <a href="./product.html?prod=${movie.id}" class="btn btn-outline-primary">Ver Más</a>
+            <p class="card-text">${product.description.slice(0, 50)}...</p>
+            <a href="./product.html?prod=${product.id}" class="btn btn-outline-primary">View More</a>
           </div>
         </div>
       </div>
@@ -44,76 +45,70 @@ const createCards = (movies) => {
   container.innerHTML = cards.join("");
 };
 
-const filterMovies = (event) => {
+// Search functionality
+const filterProducts = (event) => {
   const searchValue = event.target.value.toLowerCase();
-
-  const filteredMovies = data.filter((movie) => movie.title.toLowerCase().includes(searchValue));
-
-  createCards(filteredMovies);
+  const filteredProducts = data.filter((product) =>
+    product.title.toLowerCase().includes(searchValue)
+  );
+  createCards(filteredProducts);
 };
 
+// Reset search
 resetButton.addEventListener("click", () => {
   input.value = "";
   createCards(data);
 });
 
-input.addEventListener("input", filterMovies);
+// Input search
+input.addEventListener("input", filterProducts);
 
-const genres = [
-  "Todos",
-  "Animación",
-  "Ciencia Ficción",
-  "Acción",
-  "Drama",
-  "Comedia",
-  "Musical",
-  "Romance",
-  "Documental",
-  "Terror",
-  "Crimen",
-];
+// Genres based on furniture data
+const genres = ["All", "Dining Room", "Living Room", "Office", "Bedroom", "Outdoor", "Kitchen"];
 
-const buttons = genres.map(
-  (genre) => `
-  <button class="btn btn-secondary me-2 mb-2 genre-button">${genre}</button>
-`
-);
+// Create genre buttons
+categoriesContainer.innerHTML = genres
+  .map(
+    (genre) => `<button class="btn btn-secondary me-2 mb-2 genre-button">${genre}</button>`
+  )
+  .join("");
 
-categoriesContainer.innerHTML = buttons.join("");
+// Filter by genre
+const filterProductsByGenre = (genre) => {
+  let filteredProducts;
 
-const filterMoviesByGenre = (genre) => {
-  let filteredMovies;
-
-  if (genre === "Todos") {
-    filteredMovies = data;
-    title.innerText = `Productos`;
+  if (genre === "All") {
+    filteredProducts = data;
+    title.innerText = "Products";
   } else {
-    filteredMovies = data.filter((movie) => movie.genre.toLowerCase().includes(genre.toLowerCase()));
-    title.innerText = `Productos - ${genre}`;
+    filteredProducts = data.filter((product) =>
+      product.genre.toLowerCase().includes(genre.toLowerCase())
+    );
+    title.innerText = `Products - ${genre}`;
   }
 
-  createCards(filteredMovies);
+  createCards(filteredProducts);
 };
 
+// Add event listeners to genre buttons
 const genreButtons = document.querySelectorAll(".genre-button");
-
 genreButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    filterMoviesByGenre(event.target.innerText);
+    filterProductsByGenre(event.target.innerText);
   });
 });
 
-const spinner = document.getElementById("spinner");
-
-const myPromise = (movies) => {
+// Spinner with simulated loading
+const myPromise = (products) => {
   spinner.style.display = "block";
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(createCards(movies));
+      resolve(createCards(products));
       spinner.style.display = "none";
-    }, 3000);
+    }, 1000);
   });
 };
 
+// Initial load
 myPromise(data);

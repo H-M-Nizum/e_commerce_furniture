@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!------------------------- Css Connection ------------------------->
+    <!-- CSS -->
     <link rel="stylesheet" href="../style.css" />
 
-    <!------------------------- Bootstrap Connection ------------------------->
+    <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,7 +21,7 @@
   </head>
   <body class="custom-container">
     <header>
-      <!----- El Navbar se insertará aquí mediante JavaScript ----->
+      <!-- Navbar will be inserted here via JavaScript -->
     </header>
 
     <main>
@@ -34,11 +34,11 @@
               style="margin-right: 10px"
               id="searchInput"
               class="form-control rounded"
-              placeholder="Parasite, Noise, Eleg..."
+              placeholder="Search products..."
               onchange="filterMovies()"
             />
             <div class="input-group-append">
-              <!-- Botón de limpiar búsqueda (basurero) -->
+              <!-- Clear search button -->
               <button class="btn btn-outline-danger delete-button" type="button" onclick="clearSearch()">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -57,21 +57,21 @@
           </div>
 
           <div class="buttons-container">
-            <!----- Aqui adentro estaran los botones de las categorias ----->
+            <!-- Category buttons will be added here -->
           </div>
         </header>
         <section class="row products-container pt-2">
           <div id="spinner" class="spinner-border text-primary" role="status" style="display: none">
-            <span class="visually-hidden">Cargando...</span>
+            <span class="visually-hidden">Loading...</span>
           </div>
-          <!----- Las tarjetas se insertarán aquí mediante JavaScript ----->
+          <!-- Product cards will be inserted here via JavaScript -->
         </section>
       </div>
     </main>
 
     <footer class="footer text-center py-3">
       <div class="container">
-        <p class="mb-0 text-light">© 2024 Franco Galfre / Guayerd. Todos los derechos reservados.</p>
+        <p class="mb-0 text-light">© 2024 Franco Galfre / Guayerd. All rights reserved.</p>
       </div>
     </footer>
 
